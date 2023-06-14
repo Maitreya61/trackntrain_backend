@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const workoutRoutes = require('./routes/workout');
 const PORT = process.env.PORT || 4000
 
@@ -8,6 +9,11 @@ const PORT = process.env.PORT || 4000
 const app = express();
 
 app.use(express.json());
+
+app.use(cors({
+    origin:"https://trackntrain.onrender.com/api",
+    methods: ["GET","POST","DELETE","PATCH"]
+}))
 
 
 app.use('/api/workouts', workoutRoutes);
