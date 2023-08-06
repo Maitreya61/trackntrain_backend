@@ -11,16 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use((req, res, next) => {
-    console.log(req.path, req.method)
-    res.status(200).json("Hello")
-    next()
-  })
 
-app.use(cors({
-    origin:"https://trackntrain.onrender.com/api",
-    methods: ["GET","POST","DELETE","PATCH"]
-}))
+app.use(cors());
 
 
 app.use('/api/workouts', workoutRoutes);
@@ -28,11 +20,11 @@ app.use('/api/workouts', workoutRoutes);
 mongoose.connect(process.env.DB_URI)
     .then(()=>{
         app.listen(PORT, ()=>{
-            console.log(`Connected to DB and listening on Port`, PORT)
+            console.log(`Connected to DB and listening on Port`, PORT);
         }) 
     })
     .catch((error)=>{
-        console.log(error)
+        console.log(error);
     })
 
 
